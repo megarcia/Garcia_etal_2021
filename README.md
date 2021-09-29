@@ -34,7 +34,7 @@ Since two of our authors are U.S. Government employees and four of our authors a
 
 All code provided here is copyright © 2021 by Matthew Garcia, who programmed and performed all data analysis for the attached publication. All code in this supplement is licensed for reuse under the **GPLv3**, which is reproduced in full in a [separate document](https://github.com/megarcia/Garcia_etal_2021/blob/main/LICENSE) in this repository.
 
-The **datasets** used by these scripts are located on Dryad and will be availble upon publication at https://doi.org/10.5061/dryad.mpg4f4r19. Access prior to publication is available at [this location](https://datadryad.org/stash/share/qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98) (a large automatic download will start).
+The **datasets** used by these scripts are located on Dryad and will be available upon final publication at https://doi.org/10.5061/dryad.mpg4f4r19. Access prior to publication is available at [this location](https://datadryad.org/stash/share/qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98) (a large automatic download will start).
 
 The **supplemental animations** produced using these scripts and data are located on Zenodo at the locations listed above.
 
