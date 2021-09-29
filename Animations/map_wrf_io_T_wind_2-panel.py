@@ -1,5 +1,5 @@
 """
-Python script "map_wrf_io_T_wind_prs.py"
+Python script "map_wrf_io_T_wind_2-panel.py"
 by Matthew Garcia, Post-doctoral Research Associate
 Dept. of Forest and Wildlife Ecology
 University of Wisconsin - Madison

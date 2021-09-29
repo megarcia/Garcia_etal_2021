@@ -1,4 +1,3 @@
-# pylint: disable=C0103
 """
 Python script "plot_flight_trajectories_animation.py"
 by Matthew Garcia, Postdoctoral Research Associate
