@@ -1,6 +1,4 @@
-## Code supplement to accompany
-
-## Garcia et al. (2021, submitted)
+## Code supplement to accompany Garcia et al. (2021, submitted)
 
 ### Primary reference:
 
@@ -163,14 +161,14 @@ To generate an animated GIF of selected WRF output fields (surface temperature a
 1. Generate the hourly maps:
 * `python map_wrf_io_T_wind_2-panel.py [date]` where `[date]` is either `20130714` or `20130715`
 2. Stitch together the PNG files using ImageMagick:
-* `convert -delay 50 *_sfc_T_wind_900hPa_windspeed.png [date]_WRF-NARR_900hPa_wind_sfc_T.gif`
+* `convert -delay 50 *_sfc_T_wind_900hPa_windspeed.png [date]_WRF-NARR_900hPa_wind_sfc_T.gif`<br>
 Note that the "delay" option value is given in hundreths of a second, so this animation runs at 2 frames per second.
 
 To generate an animated GIF of pyATM trajectories for one replicate simulation:
 1. Generate the minute-by-minute maps:
 * `python plot_flight_trajectories_animation.py [date] 0` where `[date]` is either `20130714` or `20130715`
 2. Stitch together the PNG files using ImageMagick:
-* `convert -delay 10 -loop 0 *.png [date]_SBW-pyATM_flight_trajectories.gif`
+* `convert -delay 10 -loop 0 *.png [date]_SBW-pyATM_flight_trajectories.gif`<br>
 Note that the "loop" option value is 0 (zero), so this animation runs at 10 frames per second and does not loop.
 
 The data, script, and instructions for generating the animated comparison between the density of SBW moths in flight and the XAM radar reflectivity are reserved by the authors at this time, as they form the foundation for an algorithm to be presented in Part 2 of the publication.
