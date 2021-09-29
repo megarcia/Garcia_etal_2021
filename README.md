@@ -140,9 +140,9 @@ Animations (see special instructions below):
 * `mkdir 20130714 20130715`
 3. Get the data files from Dryad:
 * If you have the `wget` utility on your system:<br>
-`wget (URL forthcoming)`
+`wget (URLs forthcoming)`
 <br>**or**
-* Go to https://doi.org/10.5061/dryad.mpg4f4r19 in your browser and download all six of the "*.tar.gz" files available there, and place them in your new Garcia_etal_2021/Data/ subdirectory.
+* Go to https://doi.org/10.5061/dryad.mpg4f4r19 in your browser, download all six of the "*.tar.gz" files available there, and place them in your new Garcia_etal_2021/Data/ subdirectory.
 4. Uncompress the data files to their respective subdirectories:
 * `for f in 20130714_*.tar.gz ; do tar -xzf $f -C 20130714/ ; done`
 * `for f in 20130715_*.tar.gz ; do tar -xzf $f -C 20130715/ ; done`
@@ -159,6 +159,19 @@ I used the `convert` tool in [ImageMagick](https://imagemagick.org/) to compile 
 
 These instructions assume that you are using the scripts in this repository to generate still frames, then compiling them to an animated GIF using ImageMagick. These scripts use the same data files as the figure scripts above.
 
-Detailed instructions forthcoming.
+To generate an animated GIF of selected WRF output fields (surface temperature and winds, and 900 hPa wind speed):
+1. Generate the hourly maps:
+* `python map_wrf_io_T_wind_2-panel.py [date]` where `[date]` is either `20130714` or `20130715`
+2. Stitch together the PNG files using ImageMagick:
+* `convert -delay 50 *_sfc_T_wind_900hPa_windspeed.png [date]_WRF-NARR_900hPa_wind_sfc_T.gif`
+Note that the "delay" option value is given in hundreths of a second, so this animation runs at 2 frames per second.
 
+To generate an animated GIF of pyATM trajectories for one replicate simulation:
+1. Generate the minute-by-minute maps:
+* `python plot_flight_trajectories_animation.py [date] 0` where `[date]` is either `20130714` or `20130715`
+2. Stitch together the PNG files using ImageMagick:
+* `convert -delay 10 -loop 0 *.png [date]_SBW-pyATM_flight_trajectories.gif`
+Note that the "loop" option value is 0 (zero), so this animation runs at 10 frames per second and does not loop.
+
+The data, script, and instructions for generating the animated comparison between the density of SBW moths in flight and the XAM radar reflectivity are reserved by the authors at this time, as they form the foundation for an algorithm to be presented in Part 2 of the publication.
 
