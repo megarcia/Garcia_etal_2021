@@ -28,23 +28,23 @@ cp 20130715_0629_XAM_fliers_+_radar.png Fig_05cd.png
 cd ../
 
 cd Fig_06
-python ../Fig_02/map_wrf_io_T_wind_prs.py 20130715
+python ../Fig_03/map_wrf_io_T_wind_prs.py 20130715
 cp WRF_d03_2013-07-16_00:00_windspeed_900hPa.png Fig_06a.png
 cp WRF_d03_2013-07-16_06:00_windspeed_900hPa.png Fig_06b.png
-python ../Fig_02/map_wrf_io_T_wind_sfc.py 20130715
+python ../Fig_03/map_wrf_io_T_wind_sfc.py 20130715
 cp WRF_d03_2013-07-16_00:00_T_wind_sfc.png Fig_06c.png
 cp WRF_d03_2013-07-16_06:00_T_wind_sfc.png Fig_06d.png
 cd ../
 
 cd Fig_07
-python ../Fig_03/plot_all_flights.py 20130715 0
+python ../Fig_04/plot_all_flights.py 20130715 0
 cp 20130715_flight_trajectories_default_replicate_00000.png Fig_07.png
 cd ../
 
 cd Fig_08
-python ../Fig_04/map_flier_count_+_radar_hexbin.py 20130715 20130716 0159
+python ../Fig_05/map_flier_count_+_radar_hexbin.py 20130715 20130716 0159
 cp 20130716_0159_XAM_fliers_+_radar.png Fig_08ab.png
-python ../Fig_04/map_flier_count_+_radar_hexbin.py 20130715 20130716 0359
+python ../Fig_05/map_flier_count_+_radar_hexbin.py 20130715 20130716 0359
 cp 20130716_0359_XAM_fliers_+_radar.png Fig_08cd.png
 cd ../
 
