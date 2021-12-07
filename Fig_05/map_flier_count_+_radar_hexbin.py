@@ -59,9 +59,9 @@ def set_up_basemap():
                       lon0=mid_lon, lat0=mid_lat, length=40.0,
                       barstyle='fancy')
     parallels = np.arange(30., 60., 1.)
-    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=12)
+    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=16)
     meridians = np.arange(270., 360., 1.)
-    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=12)
+    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=16)
     #
     x_min, y_min = bmap(left_lon, bottom_lat)
     x_max, y_max = bmap(right_lon, top_lat)
@@ -75,10 +75,10 @@ def make_flier_count_hexbin_map(lats, lons, maxcount):
     hbin = bmap.hexbin(x, y, mincnt=1, extent=extent, gridsize=100,
                        vmin=1, vmax=maxcount, cmap=get_cmap('viridis'))
     cbar = plt.colorbar(pad=0.02, shrink=0.75)
-    count_clevs = cbar.get_ticks().astype(int)
+    count_clevs = [50, 100, 150, 200, 250]
     cbar.set_ticks(count_clevs)
-    cbar.ax.set_yticklabels(count_clevs, fontsize=14, rotation=90, va='center')
-    cbar.ax.set_ylabel('flier count', fontsize=14)
+    cbar.ax.set_yticklabels(count_clevs, fontsize=16, rotation=90, va='center')
+    cbar.ax.set_ylabel('flier count', fontsize=16)
     return
 
 
@@ -88,12 +88,12 @@ def make_radar_field_hexbin_map(lats, lons, refl_nan):
     hbin = bmap.hexbin(x, y, C=refl_nan, extent=extent, gridsize=100,
                        vmin=radar_dBz_min, vmax=radar_dBz_max, cmap=get_cmap('viridis'))
     radar_x, radar_y = bmap(radar_lon, radar_lat)
-    plt.plot(radar_x, radar_y, marker='+', markersize=20, c='red')
+    plt.plot(radar_x, radar_y, marker='+', markersize=20, c='orange')
     cbar = plt.colorbar(pad=0.02, shrink=0.75)
-    count_clevs = cbar.get_ticks().astype(int)
+    count_clevs = [-5, 0, 5, 10, 15, 20]
     cbar.set_ticks(count_clevs)
-    cbar.ax.set_yticklabels(count_clevs, fontsize=14, rotation=90, va='center')
-    cbar.ax.set_ylabel('reflectivity [dBz]', fontsize=14)
+    cbar.ax.set_yticklabels(count_clevs, fontsize=16, rotation=90, va='center')
+    cbar.ax.set_ylabel('reflectivity [dBz]', fontsize=16)
     return
 
 
