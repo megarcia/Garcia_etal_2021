@@ -68,13 +68,12 @@ bmap.drawstates()
 bmap.drawcountries()
 #
 # draw map references
-bmap.drawmapscale(lon=left_lon+0.75, lat=top_lat-0.5,
-                  lon0=mid_lon, lat0=mid_lat, length=100.0,
-                  barstyle='fancy')
+bmap.drawmapscale(lon=left_lon+1.25, lat=top_lat-0.5, lon0=mid_lon, lat0=mid_lat, length=200.0,
+                  barstyle='fancy', fillcolor1='w', fillcolor2='k', fontsize=16)
 parallels = np.arange(30., 60., 1.)
-bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=12)
+bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=16)
 meridians = np.arange(270., 360., 1.)
-bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=12)
+bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=16)
 #
 # get topography from WRF
 path = '../Data/%s/WRF' % sim_date
@@ -86,11 +85,12 @@ wrf_lats, wrf_lons = latlon_coords(topography)
 lons, lats = bmap(wrf_lons, wrf_lats)
 #
 # plot topography from WRF
-bmap.contourf(lons, lats, topography, 48, cmap=get_cmap('terrain'))
+bmap.contourf(lons, lats, topography, 48, cmap=get_cmap('gist_earth'))
 cbar = plt.colorbar(pad=0.02, shrink=0.75)
-labels = cbar.ax.get_yticklabels()
-cbar.ax.set_yticklabels(labels=labels, rotation=90, va='center', fontsize=14)
-cbar.ax.set_ylabel('surface elevation [m AMSL]', fontsize=14)
+labels = np.arange(0, 1075, 125)
+cbar.ax.set_yticks(labels)
+cbar.ax.set_yticklabels(labels=labels, rotation=90, va='center', fontsize=16)
+cbar.ax.set_ylabel('surface elevation [m AMSL]', fontsize=16)
 print('- mapped WRF topography')
 #
 # plot flight trajectories from pyATM
@@ -105,7 +105,7 @@ for infname in infnames:
     if npts > 2:
         bmap.plot(traj_lons[0], traj_lats[0], '+', markersize=10, color='k', latlon=True)
         bmap.plot(traj_lons[-1], traj_lats[-1], 'x', markersize=10, color='k', latlon=True)
-        bmap.plot(traj_lons, traj_lats, linewidth=1, color='r', latlon=True)
+        bmap.plot(traj_lons, traj_lats, linewidth=1, color='orange', latlon=True)
         nflights += 1
 print('- plotted %d flight trajectories' % nflights)
 #
