@@ -42,9 +42,9 @@ cp 20130715_flight_trajectories_default_replicate_00000.png Fig_07.png
 cd ../
 
 cd Fig_08
-python ../Fig_05/map_flier_count_+_radar_hexbin.py 20130715 20130716 0159
+python map_flier_count_+_radar_hexbin.py 20130715 20130716 0159
 cp 20130716_0159_XAM_fliers_+_radar.png Fig_08ab.png
-python ../Fig_05/map_flier_count_+_radar_hexbin.py 20130715 20130716 0359
+python map_flier_count_+_radar_hexbin.py 20130715 20130716 0359
 cp 20130716_0359_XAM_fliers_+_radar.png Fig_08cd.png
 cd ../
 
