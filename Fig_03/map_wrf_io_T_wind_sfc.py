@@ -50,11 +50,12 @@ def plot_T_wind_map(T2, U10, V10, fname):
     # draw T2 with filled contours
     levels = np.arange(4, 35)
     T2_contours = bmap.contourf(x, y, to_np(smooth_T2),
-                                levels=levels, cmap=get_cmap('jet'))
+                                levels=levels, cmap=get_cmap('plasma'))
     cbar = plt.colorbar(T2_contours, pad=0.02, shrink=0.75)
-    labels = cbar.ax.get_yticklabels()
-    cbar.ax.set_yticklabels(labels=labels, fontsize=14)
-    cbar.ax.set_ylabel(r'$T_{sfc}$ [$^{\circ}$C]', fontsize=14)
+    labels = np.arange(4, 35, 3)
+    cbar.ax.set_yticks(labels)
+    cbar.ax.set_yticklabels(labels=labels, fontsize=16)
+    cbar.ax.set_ylabel(r'$T_{sfc}$ [$^{\circ}$C]', fontsize=16)
     #
     # draw wind barbs
     interval = 10
@@ -63,9 +64,9 @@ def plot_T_wind_map(T2, U10, V10, fname):
                to_np(V10[::interval, ::interval]), length=4)
     #
     parallels = np.arange(30., 60., 1.)
-    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=12)
+    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=16)
     meridians = np.arange(270., 360., 1.)
-    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=12)
+    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=16)
     #
     plt.tight_layout()
     plt.savefig(fname, dpi=300, bbox_inches='tight')
@@ -97,11 +98,12 @@ def plot_windspeed_map(U10, V10, fname):
     # draw windspeed with filled contours
     levels = np.arange(0, 25)
     windspeed_contours = bmap.contourf(x, y, to_np(smooth_windspeed),
-                                       levels=levels, cmap=get_cmap('jet'))
+                                       levels=levels, cmap=get_cmap('Blues'))
     cbar = plt.colorbar(windspeed_contours, pad=0.02, shrink=0.75)
-    labels = cbar.ax.get_yticklabels()
-    cbar.ax.set_yticklabels(labels=labels, fontsize=14)
-    cbar.ax.set_ylabel('wind speed [m/s]', fontsize=14)
+    labels = np.arange(0, 25, 3)
+    cbar.ax.set_yticks(labels)
+    cbar.ax.set_yticklabels(labels=labels, fontsize=16)
+    cbar.ax.set_ylabel('wind speed [m/s]', fontsize=16)
     #
     # draw wind barbs
     interval = 10
@@ -110,9 +112,9 @@ def plot_windspeed_map(U10, V10, fname):
                to_np(V10[::interval, ::interval]), length=4)
     #
     parallels = np.arange(30., 60., 1.)
-    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=12)
+    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=16)
     meridians = np.arange(270., 360., 1.)
-    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=12)
+    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=16)
     #
     plt.tight_layout()
     plt.savefig(fname, dpi=300, bbox_inches='tight')
