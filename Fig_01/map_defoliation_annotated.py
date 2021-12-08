@@ -71,28 +71,27 @@ cbar.set_ticks(clevs)
 cbar.ax.set_yticklabels(labels=['light defoliation', 'moderate defoliation', 'severe defoliation', ''],
                         rotation=90, va='bottom', fontsize=12)
 # 
-bmap.drawmapscale(lon=left_lon+0.75, lat=top_lat-0.5,
-                  lon0=mid_lon, lat0=mid_lat, length=100.0,
-                  barstyle='fancy')
+bmap.drawmapscale(lon=left_lon+1.25, lat=top_lat-0.5, lon0=mid_lon, lat0=mid_lat, length=200.0,
+                  barstyle='fancy', fillcolor1='w', fillcolor2='k', fontsize=16)
 parallels = np.arange(30., 60., 1.)
-bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=12)
+bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=16)
 meridians = np.arange(270., 360., 1.)
-bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=12)
+bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=16)
 #
 annotations = [(45.8, -69.0, 'Maine', 0, 14), (46.8, -66.5, 'New Brunswick', 0, 14),
-               (50.5, -70.5, 'Quebec', 0, 14), (46.1, -71.5, 'Quebec', 0, 14),
+               (49.75, -72.0, 'Quebec', 0, 14), (46.1, -71.5, 'Quebec', 0, 14),
                (48.4783, -67.5822, '+', 0, 20), (48.25, -67.95, 'XAM\nradar', 0, 12),
                (48.4, -72.7, 'St. Jean\nLake', 0, 12),
                (48.1, -70.8, 'Saguenay R.', 0, 12),
                (49.35, -65.8, 'St. Lawrence estuary', 10, 12),
                (49.7, -66.3, 'North\nShore', 0, 12),
                (47.5, -69.5, 'Lower St. Lawrence', 50, 12),
-               (48.6, -66.5, 'Gaspe', 0, 12),
+               (48.6, -66.0, 'Gaspe', 0, 12),
                (49.1, -69.7, 'Betsiamites R.', -40, 10),
                (50.65, -65.85, 'Moisie R.', -90, 10),
                (50.65, -64.55, 'St. Jean R.', -90, 10),
-               (48.5, -69.0, '+', 0, 20), (48.65, -68.65, 'Fig.\n9a', 30, 12),
-               (49.0, -68.0, '+', 0, 20), (49.05, -67.6, 'Fig.\n9b', 0, 12)] 
+               (48.5, -69.0, '+', 0, 20), (48.65, -68.65, 'Fig.\n10a', 30, 12),
+               (49.0, -68.0, '+', 0, 20), (49.05, -67.6, 'Fig.\n10b', 0, 12)] 
 for annotation in annotations:
     x, y = bmap(annotation[1], annotation[0])
     plt.text(x, y, annotation[2], va='center', ha='center',
