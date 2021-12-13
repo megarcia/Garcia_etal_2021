@@ -41,28 +41,28 @@ def plot_profile(elapsed_time, alt, Temp, fname):
     segments = np.concatenate([points[:-1], points[1:]], axis=1)
     T_min, T_max = 17, 27
     norm = plt.Normalize(T_min, T_max)
-    lc = LineCollection(segments, cmap=get_cmap('jet'), norm=norm)
+    lc = LineCollection(segments, cmap=get_cmap('plasma'), norm=norm)
     lc.set_array(Temp)
     lc.set_linewidth(5)
     line = plt.gca().add_collection(lc)
     #
     T_ticks = np.arange(T_min, T_max+1, 2).astype(int)
-    cbar = plt.colorbar(line, ticks=T_ticks, pad=0.02, shrink=0.75)  #, orientation='vertical')
-    cbar.ax.set_yticklabels(T_ticks, fontsize=14)
-    cbar.set_label(r'$T$ [$^{\circ}$C]', fontsize=14)
+    cbar = plt.colorbar(line, ticks=T_ticks, pad=0.02, shrink=0.9)
+    cbar.ax.set_yticklabels(T_ticks, fontsize=16)
+    cbar.set_label(r'$T$ [$^{\circ}$C]', fontsize=16)
     #
     plt.plot(elapsed_time, sfc, color='k', label='ground')
     plt.xlim(0, elapsed_time[-1]+1)
     xticks = np.arange(0, ((elapsed_time[-1]//60)+1)*60, 60).astype(int)
     ax1.set_xticks(xticks)
-    ax1.set_xticklabels(xticks, fontsize=14)
-    plt.xlabel('Flight time [mins]', fontsize=14)
+    ax1.set_xticklabels(xticks, fontsize=16)
+    plt.xlabel('Flight time [mins]', fontsize=16)
     #
     plt.ylim(0, 1200)
     yticks = np.arange(0, 1200+1, 200).astype(int)
     ax1.set_yticks(yticks)
-    ax1.set_yticklabels(yticks, fontsize=14)
-    plt.ylabel('Altitude [m AMSL]', fontsize=14)
+    ax1.set_yticklabels(yticks, fontsize=16)
+    plt.ylabel('Altitude [m AMSL]', fontsize=16)
     #
     plt.tight_layout()
     plt.savefig(fname, dpi=300, bbox_inches='tight')
@@ -75,6 +75,7 @@ rep_num = 0
 flights = {'20130714' : ['000000101', '000000124'],
            '20130715' : ['000000168', '000000820']}
 colors = ['red', 'orange', 'green', 'blue']
+styles = ['solid', 'dotted', 'dashed', 'dashdot']
 markers = [('a', "a'"), ('b', "b'"), ('c', "c'"), ('d', "d'")]
 #
 #
@@ -84,7 +85,7 @@ mid_lat = (bottom_lat + top_lat) / 2.0
 left_lon, right_lon = -73.0, -64.0
 mid_lon = (left_lon + right_lon) / 2.0
 #
-map1 = plt.figure(figsize=(6, 6))
+map1 = plt.figure(figsize=(8, 8))
 bmap = Basemap(projection='tmerc', lon_0=mid_lon, lat_0=mid_lat,
                lat_ts=mid_lat, llcrnrlat=bottom_lat, llcrnrlon=left_lon,
                urcrnrlat=top_lat, urcrnrlon=right_lon, resolution='h',
@@ -95,14 +96,12 @@ bmap.drawcountries()
 bmap.drawmapboundary(fill_color='lightblue')
 bmap.fillcontinents(color='white', lake_color='lightblue')
 #
-# draw map references
-bmap.drawmapscale(lon=left_lon+0.75, lat=top_lat-0.5,
-                  lon0=mid_lon, lat0=mid_lat, length=100.0,
-                  barstyle='fancy')
+bmap.drawmapscale(lon=left_lon+1.25, lat=top_lat-0.5, lon0=mid_lon, lat0=mid_lat, length=200.0,
+                  barstyle='fancy', fillcolor1='w', fillcolor2='k', fontsize=16)
 parallels = np.arange(30., 60., 1.)
-bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=12)
+bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=16)
 meridians = np.arange(270., 360., 1.)
-bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=12)
+bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=16)
 #
 # plot individual flight profiles and map trajectories
 i = 0
@@ -137,13 +136,14 @@ for sim_date, fliers in flights.items():
         #
         # plot all flight trajectories on common map
         text_offset = 0.1
-        bmap.plot(lon[0], lat[0], '+', markersize=10, color='k', latlon=True)
+        bmap.plot(lon[0], lat[0], '+', markersize=14, color='k', latlon=True)
         x, y = bmap(lon[0]-text_offset, lat[0]+text_offset)
-        plt.text(x, y, markers[i][0], va='bottom', ha='center', fontsize=14)
-        bmap.plot(lon[-1], lat[-1], 'x', markersize=10, color='k', latlon=True)
+        plt.text(x, y, markers[i][0], va='bottom', ha='center', fontsize=16)
+        bmap.plot(lon[-1], lat[-1], 'x', markersize=14, color='k', latlon=True)
         x, y = bmap(lon[-1]+text_offset, lat[-1]-text_offset)
-        plt.text(x, y, markers[i][1], va='top', ha='center', fontsize=14)
-        bmap.plot(lon, lat, linewidth=5, color=colors[i], latlon=True)
+        plt.text(x, y, markers[i][1], va='top', ha='center', fontsize=16)
+        bmap.plot(lon, lat, linewidth=4, color=colors[i], linestyle=styles[i],
+                  label='%s ... %s'% (markers[i][0], markers[i][1]), latlon=True)
         #
         # plot individual flight altitude/T profile
         outfname = 'flier_%s_%s_%s_alt_T_profile.png' % (str(rep_num).zfill(5), sim_date, flier)
@@ -151,6 +151,7 @@ for sim_date, fliers in flights.items():
         #
         i += 1
 #
+map1.legend(loc=(0.1, 0.06), fontsize=16, framealpha=1)
 map1.tight_layout()
 fname = 'combined_flight_profiles_map.png'
 map1.savefig(fname, dpi=300, bbox_inches='tight')
