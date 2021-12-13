@@ -61,7 +61,7 @@ plt.xlabel('fraction of all fliers', fontsize=16)
 yticks = np.arange(0, 1801, 300)
 ax1.set_yticks(yticks)
 ax1.set_yticklabels(yticks, fontsize=16, rotation='vertical', va='center')
-plt.ylabel('mean flight altitude (m AGL)', fontsize=16)
+plt.ylabel('mean flight altitude [m AGL]', fontsize=16)
 #
 plt.tight_layout()
 fname = 'default_flight_alt_combined_histograms.png'
