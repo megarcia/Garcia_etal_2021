@@ -41,9 +41,9 @@ def set_up_basemap():
     bmap.drawmapboundary()
     #
     parallels = np.arange(30., 60., 1.)
-    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=10)
+    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=14)
     meridians = np.arange(270., 360., 1.)
-    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=10)
+    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=14)
     return bmap
 
 
@@ -62,11 +62,12 @@ def plot_upa_windspeed_map(U, V, title):
     # draw windspeed with filled contours
     levels = np.arange(0, 25)
     windspeed_contours = bmap.contourf(x, y, to_np(smooth_windspeed),
-                                       levels=levels, cmap=get_cmap('jet'))
-    cbar = plt.colorbar(windspeed_contours, pad=0.02, shrink=0.75)
-    labels = cbar.ax.get_yticklabels()
-    cbar.ax.set_yticklabels(labels=labels, fontsize=8)
-    cbar.ax.set_ylabel('wind speed [m/s]', fontsize=10)
+                                       levels=levels, cmap=get_cmap('Blues'))
+    cbar = plt.colorbar(windspeed_contours, pad=0.02, shrink=0.9)
+    labels = np.arange(0, 25, 3)
+    cbar.ax.set_yticks(labels)
+    cbar.ax.set_yticklabels(labels=labels, fontsize=14)
+    cbar.ax.set_ylabel('wind speed [m/s]', fontsize=14)
     #
     # draw wind barbs
     interval = 10
@@ -74,7 +75,7 @@ def plot_upa_windspeed_map(U, V, title):
                to_np(U[::interval, ::interval]),
                to_np(V[::interval, ::interval]), length=4)
     #
-    plt.title(title, fontsize=12)
+    plt.title(title, fontsize=14)
     return
 
 
@@ -92,11 +93,12 @@ def plot_sfc_T_wind_map(T2, U10, V10, title):
     # draw T2 with filled contours
     levels = np.arange(4, 35)
     T2_contours = bmap.contourf(x, y, to_np(smooth_T2),
-                                levels=levels, cmap=get_cmap('jet'))
-    cbar = plt.colorbar(T2_contours, pad=0.02, shrink=0.75)
-    labels = cbar.ax.get_yticklabels()
-    cbar.ax.set_yticklabels(labels=labels, fontsize=8)
-    cbar.ax.set_ylabel(r'$T_{sfc}$ [$^{\circ}$C]', fontsize=10)
+                                levels=levels, cmap=get_cmap('plasma'))
+    cbar = plt.colorbar(T2_contours, pad=0.02, shrink=0.9)
+    labels = np.arange(4, 35, 3)
+    cbar.ax.set_yticks(labels)
+    cbar.ax.set_yticklabels(labels=labels, fontsize=14)
+    cbar.ax.set_ylabel(r'$T_{sfc}$ [$^{\circ}$C]', fontsize=14)
     #
     # draw wind barbs
     interval = 10
@@ -104,7 +106,7 @@ def plot_sfc_T_wind_map(T2, U10, V10, title):
                to_np(U10[::interval, ::interval]),
                to_np(V10[::interval, ::interval]), length=4)
     #
-    plt.title(title, fontsize=12)
+    plt.title(title, fontsize=14)
     return
 
 
