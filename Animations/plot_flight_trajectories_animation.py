@@ -39,9 +39,9 @@ def set_up_basemap():
     bmap.drawmapboundary()
     #
     parallels = np.arange(30., 60., 1.)
-    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=10)
+    bmap.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=14)
     meridians = np.arange(270., 360., 1.)
-    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=10)
+    bmap.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=14)
     return bmap
 
 
@@ -49,11 +49,12 @@ def plot_topography(bmap, topography):
     '''plot topography from WRF, with colorbar'''
     wrf_lats, wrf_lons = latlon_coords(topography)
     lons, lats = bmap(wrf_lons, wrf_lats)
-    bmap.contourf(lons, lats, topography, 48, cmap=get_cmap('terrain'))
+    bmap.contourf(lons, lats, topography, 48, cmap=get_cmap('gist_earth'))
     cbar = plt.colorbar(pad=0.02, shrink=0.75)
-    labels = cbar.ax.get_yticklabels()
-    cbar.ax.set_yticklabels(labels=labels, rotation=90, va='center', fontsize=8)
-    cbar.ax.set_ylabel('surface elevation [m AMSL]', fontsize=10)
+    labels = np.arange(0, 1075, 125)
+    cbar.ax.set_yticks(labels)
+    cbar.ax.set_yticklabels(labels=labels, rotation=90, va='center', fontsize=14)
+    cbar.ax.set_ylabel('surface elevation [m AMSL]', fontsize=14)
     return
 
 
@@ -104,7 +105,7 @@ def plot_sbw_locations(bmap, locations, last_frame=False):
             bmap.plot(lons[0], lats[0], '+', markersize=10, color='k', latlon=True)
             if (alts[-1] == 0.0) or last_frame:
                 bmap.plot(lons[-1], lats[-1], 'x', markersize=10, color='k', latlon=True)
-            bmap.plot(lons, lats, linewidth=1, color='r', latlon=True)
+            bmap.plot(lons, lats, linewidth=1, color='orange', latlon=True)
     return
 
 
@@ -116,10 +117,10 @@ def generate_plot(topography, fname, locations, last_frame=False):
     plot_sbw_locations(bmap, locations, last_frame)
     datetimestr = fname.split('/')[-1].split('_')[1].split('+')[0]
     datestr, timestr = datetimestr.split('T')
-    title = '%s simulation: %s at %s UTC' % (sim_date, datestr, timestr[:-3])
-    plt.title(title, fontsize=12)
+    title = '%s SBW dispersal simulation: %s at %s UTC' % (sim_date, datestr, timestr[:-3])
+    plt.title(title, fontsize=14)
     plt.tight_layout()
-    outfname = '%s/%s_flight_trajectories_%s_%s.png' % (sim_date, sim_date, datestr, timestr[:-3])
+    outfname = '%s_flight_trajectories_%s_%s.png' % (sim_date, datestr, timestr[:-3])
     plt.savefig(outfname, dpi=300, bbox_inches='tight')
     print('- saved %s' % outfname)
     plt.close()
@@ -129,6 +130,7 @@ def generate_plot(topography, fname, locations, last_frame=False):
 print()
 sim_date = sys.argv[1]
 rep_num = str(int(sys.argv[2])).zfill(5)
+output_interval = int(sys.argv[3])
 #
 # get topography from WRF
 path = '../Data/%s/WRF' % sim_date
@@ -139,13 +141,21 @@ topography = getvar(ncfile, 'HGT')
 #
 # get animation map times and file list
 path = '../Data/%s/pyATM/WRF-NARR_d03_%s_simulation_%s_summary' % (sim_date, sim_date, rep_num)
-locfnames = sorted(glob('%s/locs_*_%s.csv' % (path, rep_num)))
-print('found %d simulation output times with SBW locations' % len(locfnames))
+allfnames = sorted(glob('%s/locs_*_%s.csv' % (path, rep_num)))
+print('found %d simulation output times with SBW locations' % len(allfnames))
+final_fname = allfnames[-1]
+locfnames = list()
+for fname in allfnames:
+    mins = int(fname.split('/')[-1].split('.')[0].split('_')[1].split(':')[1])
+    if (mins % output_interval) == 0:
+        locfnames.append(fname)
+if locfnames[-1] != final_fname:
+    locfnames.append(final_fname)
+print('reduced to %d output times at %d-min intervals' % (len(locfnames), output_interval))
 #
 # get locations at initial time and set up dict structure
 sbw_locations = dict()
-fname = locfnames[0]
-locs_df = pd.read_csv(fname, index_col=None)
+locs_df = pd.read_csv(locfnames[0], index_col=None)
 locs_df = locs_df.rename(columns = {'Unnamed: 0':'sbw_ID'})
 sbw_ids = list(locs_df['sbw_ID'])
 lats = np.array(locs_df['lat'])
@@ -155,7 +165,7 @@ for i, sbw_id in enumerate(sbw_ids):
     sbw_locations[sbw_id] = [(lats[i], lons[i], alts[i])]
 #
 # plot initial locations
-generate_plot(topography, fname, sbw_locations)
+generate_plot(topography, locfnames[0], sbw_locations)
 #
 # plot trajectories
 for fname in locfnames[1:]:
