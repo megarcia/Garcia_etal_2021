@@ -1,12 +1,10 @@
-## Code supplement to accompany Garcia et al. (2022, in revision)
+## Code supplement to accompany Garcia et al. (2022)
 
 ### Primary reference:
 
-Garcia, M., B.R. Sturtevant, R. Saint-Amant, J.J. Charney, J. Delisle, Y. Boulanger, P.A. Townsend, and J. Régnière, 2022: "Modeling weather-driven long-distance dispersal of spruce budworm moths (_Choristoneura fumiferana_). Part 1: Model description." Submitted to _Agricultural and Forest Meteorology_ (Elsevier) on 28 September 2021, in revision as of 21 December 2021.
+Garcia, M., B.R. Sturtevant, R. Saint-Amant, J.J. Charney, J. Delisle, Y. Boulanger, P.A. Townsend, and J. Régnière, 2022: "Modeling weather-driven long-distance dispersal of spruce budworm moths (_Choristoneura fumiferana_). Part 1: Model description." _Agricultural and Forest Meteorology_, doi: [10.1016/j.agrformet.2022.108815](https://doi.org/10.1016/j.agrformet.2022.108815).
 
 Contact: [matt.e.garcia@gmail.com](mailto://matt.e.garcia@gmail.com)
-
-This reference information will be updated throughout the review and publication process.
 
 <hr>
 
@@ -20,21 +18,9 @@ Since two of our authors are U.S. Government employees and four of our authors a
 
 All **code** provided here is copyright ©2021 by Matthew Garcia, who programmed and performed all data analysis for the publication. All code in this supplement is licensed for reuse under the **GPLv3**, which is reproduced in full in a [separate document](https://github.com/megarcia/Garcia_etal_2022a/blob/main/LICENSE) in this repository.
 
-The **datasets** used by these scripts are located on [Dryad](https://datadryad.org/) and will be available upon final publication at https://doi.org/10.5061/dryad.mpg4f4r19. Access prior to publication is available at [this location](https://datadryad.org/stash/share/qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98) (a large automatic download will start). A README is also available there describing the sample datasets and supplemental animations.
+The **datasets** used by these scripts are located on [Dryad](https://datadryad.org/) and will be available upon final publication at doi: [10.5061/dryad.mpg4f4r19](https://doi.org/10.5061/dryad.mpg4f4r19). A README.txt file is also available there describing the sample datasets and supplemental animations.
 
-The **supplemental animations** (SA) produced using these scripts and data are located on [Zenodo](https://zenodo.org/) (via Dryad) at the following links:
-
-SA1: [20130714-15_WRF-NARR_900hPa_wind_sfc_T.gif](https://datadryad.org/stash/downloads/zenodo_file/1047948?share=qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98)
-
-SA2: [20130714-15_SBW-pyATM_flight_trajectories.gif](https://datadryad.org/stash/downloads/zenodo_file/1047951?share=qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98)
-
-SA3: [20130714-15_pyATM_flier_density_XAM_radar.gif](https://datadryad.org/stash/downloads/zenodo_file/1047952?share=qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98)
-
-SA4: [20130715-16_WRF-NARR_900hPa_wind_sfc_T.gif](https://datadryad.org/stash/downloads/zenodo_file/1047947?share=qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98)
-
-SA5: [20130715-16_SBW-pyATM_flight_trajectories.gif](https://datadryad.org/stash/downloads/zenodo_file/1047944?share=qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98)
-
-SA6: [20130715-16_pyATM_flier_density_XAM_radar.gif](https://datadryad.org/stash/downloads/zenodo_file/1047953?share=qeePqE_OSF0bZbHcW9gi_nhDvijyLynNj6R4Wwuj_98)
+The **supplemental animations** (SA) produced using these scripts and data are located on [Zenodo](https://zenodo.org/) (via Dryad) at doi: [10.5281/zenodo.5534999](https://doi.org/10.5281/zenodo.5534999):
 
 <hr>
 
